@@ -11,16 +11,6 @@ export default Ember.Route.extend({
       ['Watch TV', 2],
       ['Sleep', 7],
     ];
-  },
-  options: {
-    title: 'How I spend my days',
-    height: 300,
-    width: 400,
-
-    animation: {
-      startup: true,
-      easing: 'inAndOut',
-    },
-  },
+  }
 
 });
