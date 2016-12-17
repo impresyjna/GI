@@ -19,31 +19,31 @@
 
 {{area-chart data=model options=options}}
 
-{{#leaflet-map lat=lat lng=lng zoom=zoom}}
+<div id='map'></div>
 
-  {{tile-layer url="http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png"}}
-
-  {{#marker-layer location=emberConfLocation}}
-    {{#popup-layer}}
-      <h3>The Oregon Convention Center</h3>
-      777 NE Martin Luther King Jr Blvd<br>
-      Portland, OR 97232
-    {{/popup-layer}}
-  {{/marker-layer}}
-
-  {{#marker-layer location=hotel}}
-    {{#popup-layer}}
-      <h3>Hotel</h3>
-    {{/popup-layer}}
-  {{/marker-layer}}
-
-{{/leaflet-map}}
-
-<script type="text/javascript" src="admin_level_6.js"></script>
 
 <script>
 
-  var map = L.map('leaflet-map');
+  var map = L.map('map');
+  map.createPane('labels');
+
+  // This pane is above markers but below popups
+  map.getPane('labels').style.zIndex = 650;
+
+  // Layers in this pane are non-interactive and do not obscure mouse/touch events
+  map.getPane('labels').style.pointerEvents = 'none';
+
+
+  var cartodbAttribution = '';
+
+  var positron = L.tileLayer('http://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}.png', {
+    attribution: cartodbAttribution
+  }).addTo(map);
+
+  var positronLabels = L.tileLayer('http://{s}.basemaps.cartocdn.com/light_only_labels/{z}/{x}/{y}.png', {
+    attribution: cartodbAttribution,
+    pane: 'labels'
+  }).addTo(map);
 
   geojson = L.geoJson(boundaries).addTo(map);
 
@@ -51,4 +51,5 @@
     layer.bindPopup(layer.feature.properties.name);
   });
 
+  map.setView({ lat: 53.01375, lng: 18.59814 }, 8);
 </script>
