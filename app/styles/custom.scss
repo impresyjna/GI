@@ -38,3 +38,19 @@ md-card {
   transform: translate(-50%, -50%);
   width: 80%;
 }
+
+button.toggle-button {
+  display: block;
+  width: 100%;
+  padding: 1em 1em;
+}
+
+.title {
+  float: left;
+}
+
+.toggle-icon {
+  float: right;
+  display:inline-block;
+  margin-left:auto; margin-right:0;
+}
