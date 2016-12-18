@@ -1,10 +1,16 @@
-<div id="tabs">
-  {{#paper-button raised=true primary=true class='active' id='county'}}Województwo{{/paper-button}}
-  {{#paper-button raised=true primary=true id='district'}}Powiaty{{/paper-button}}
+<div class="layout-row layout-lg-column" >
+  {{#paper-card as |card|}}
+    {{#card.title as |title|}}
+      <div id="tabs">
+        {{#paper-button raised=true primary=true class='active' id='county'}}Województwo{{/paper-button}}
+        {{#paper-button raised=true primary=true id='district'}}Powiaty{{/paper-button}}
+      </div>
+    {{/card.title}}
+    {{#card.actions}}
+      <div id='map'></div>
+    {{/card.actions}}
+  {{/paper-card}}
 </div>
-
-<div id='map'></div>
-
 
 <script>
   $(document).ready(function(){
