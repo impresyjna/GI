@@ -1,11 +1,19 @@
 body {
-  background-color: #ffc49d;
+  background-color: #607D8B;
 }
 
 #map {
   width: 100%;
   height: 50em;
   display: block;
+  visibility: visible;
+}
+
+#map2 {
+  width: 100%;
+  height: 50em;
+  display: none;
+  visibility: hidden;
 }
 
 #tabs {
@@ -13,8 +21,12 @@ body {
   width: 100%;
 }
 
-.active {
+button.active {
+  background-color: #303F9F !important;
+}
 
+button.not-active {
+  background-color: #C5CAE9 !important;
 }
 
 md-card {

@@ -3,21 +3,50 @@
     {{#card.title as |title|}}
       <div id="tabs">
         {{#paper-button raised=true primary=true class='active' id='county'}}Województwo{{/paper-button}}
-        {{#paper-button raised=true primary=true id='district'}}Powiaty{{/paper-button}}
+        {{#paper-button raised=true primary=true class='not-active' id='district'}}Powiaty{{/paper-button}}
       </div>
     {{/card.title}}
     {{#card.actions}}
       <div id='map'></div>
+      <div id='map2'></div>
     {{/card.actions}}
   {{/paper-card}}
 </div>
 
 <script>
   $(document).ready(function(){
-      if($("#county").hasClass("active")) {
-          adminLevel4();
+    adminLevel4();
+    adminLevel6();
+    if($("#county").hasClass("active")) {
+      document.getElementById("map").style.visibility = "visible";
+      document.getElementById("map2").style.visibility = "hidden";
+      document.getElementById("map").style.display= "block";
+      document.getElementById("map2").style.display= "none";
+      } else {
+      document.getElementById("map2").style.visibility = "visible";
+      document.getElementById("map").style.visibility = "hidden";
+      document.getElementById("map2").style.display= "block";
+      document.getElementById("map").style.display= "none";
       }
-  })
+  });
+
+
+  $("#county").click(function(){
+    document.getElementById("map").style.visibility = "visible";
+    document.getElementById("map2").style.visibility = "hidden";
+    document.getElementById("map").style.display= "block";
+    document.getElementById("map2").style.display= "none";
+    var map = L.map('map');
+  });
+
+  $("#district").click(function(){
+    document.getElementById("map2").style.visibility = "visible";
+    document.getElementById("map").style.visibility = "hidden";
+    document.getElementById("map2").style.display= "block";
+    document.getElementById("map").style.display= "none";
+    var map = L.map('map');
+    map.setView({ lat: 53.01375, lng: 18.59814 }, 8);
+  });
 
   function adminLevel4() {
     var map = L.map('map');
@@ -51,7 +80,7 @@
   }
 
   function adminLevel6() {
-    var map = L.map('map');
+    var map = L.map('map2');
     map.createPane('labels');
 
     // This pane is above markers but below popups
