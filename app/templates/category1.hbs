@@ -1,0 +1,12 @@
+<div class="layout-row layout-lg-column" >
+  {{#paper-card as |card|}}
+    {{#card.title as |title|}}
+      {{#title.text as |text|}}
+        {{#text.headline}}Pojazdy{{/text.headline}}
+      {{/title.text}}
+    {{/card.title}}
+    {{#card.content class="layout-row layout-align-space-between"}}
+
+    {{/card.content}}
+  {{/paper-card}}
+</div>

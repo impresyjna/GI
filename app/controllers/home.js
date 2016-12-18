@@ -17,8 +17,11 @@ export default Ember.Controller.extend({
     },
   },
 
-  goToPage : function() {
-    this.transitionToRoute('county');
+  actions: {
+    targetButton(item) {
+      //this.transitionToRoute(item);
+      this.transitionToRoute(item);
+    }
   }
 
 });
