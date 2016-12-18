@@ -20,7 +20,6 @@
     adminLevel6();
   });
 
-
   $("#county").click(function(){
     $('#district').removeClass('active');
     $('#county').removeClass('not-active');
@@ -92,7 +91,7 @@
     geojson = L.geoJson(countyBoundaries).addTo(map);
 
     geojson.eachLayer(function (layer) {
-      layer.bindPopup(layer.feature.properties.name);
+      layer.on('click', openNewPage);
     });
 
     map.setView({ lat: 53.01375, lng: 18.59814 }, 8);
@@ -125,10 +124,15 @@
     geojson = L.geoJson(boundaries).addTo(map);
 
     geojson.eachLayer(function (layer) {
-      layer.bindPopup(layer.feature.properties.name);
+//      layer.bindPopup(layer.feature.properties.name);
+      layer.on('click', openNewPage);
     });
 
     map.setView({ lat: 53.01375, lng: 18.59814 }, 8);
     map.invalidateSize();
+  }
+
+  function openNewPage() {
+    window.open("/county","_self")
   }
 </script>

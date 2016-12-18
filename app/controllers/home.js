@@ -15,6 +15,10 @@ export default Ember.Controller.extend({
       startup: true,
       easing: 'inAndOut',
     },
+  },
+
+  goToPage : function() {
+    this.transitionToRoute('county');
   }
 
 });
