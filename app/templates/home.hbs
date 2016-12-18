@@ -22,11 +22,19 @@
 
 
   $("#county").click(function(){
+    $('#district').removeClass('active');
+    $('#county').removeClass('not-active');
+    $('#district').addClass('not-active');
+    $('#county').addClass('active');
     geojson = L.geoJson(countyBoundaries)
     changeBoundaries(geojson);
   });
 
   $("#district").click(function(){
+    $('#county').removeClass('active');
+    $('#district').removeClass('not-active');
+    $('#county').addClass('not-active');
+    $('#district').addClass('active');
     geojson = L.geoJson(boundaries)
     changeBoundaries(geojson);
   });
