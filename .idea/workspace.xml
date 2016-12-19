@@ -97,8 +97,8 @@
       <file leaf-file-name="custom.scss" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/styles/custom.scss">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="253">
-              <caret line="111" column="27" lean-forward="false" selection-start-line="111" selection-start-column="27" selection-end-line="111" selection-end-column="27" />
+            <state relative-caret-position="30">
+              <caret line="2" column="14" lean-forward="false" selection-start-line="2" selection-start-column="14" selection-end-line="2" selection-end-column="14" />
               <folding />
             </state>
           </provider>
@@ -110,7 +110,7 @@
             <state relative-caret-position="214">
               <caret line="8722" column="28" lean-forward="false" selection-start-line="8722" selection-start-column="28" selection-end-line="8722" selection-end-column="28" />
               <folding>
-                <marker date="1482151736000" expanded="true" signature="383860:383968" ph="{...}" />
+                <marker date="1482152457000" expanded="true" signature="383860:383997" ph="{...}" />
               </folding>
             </state>
           </provider>
@@ -495,12 +495,12 @@
       <workItem from="1481735889120" duration="203000" />
       <workItem from="1481741982954" duration="160000" />
       <workItem from="1481929362312" duration="5720000" />
-      <workItem from="1481990822752" duration="17226000" />
+      <workItem from="1481990822752" duration="17762000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="37557000" />
+    <option name="totallyTimeSpent" value="38093000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="0" />
@@ -916,15 +916,15 @@
         <state relative-caret-position="214">
           <caret line="8722" column="28" lean-forward="false" selection-start-line="8722" selection-start-column="28" selection-end-line="8722" selection-end-column="28" />
           <folding>
-            <marker date="1482151736000" expanded="true" signature="383860:383968" ph="{...}" />
+            <marker date="1482152457000" expanded="true" signature="383860:383997" ph="{...}" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/styles/custom.scss">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="253">
-          <caret line="111" column="27" lean-forward="false" selection-start-line="111" selection-start-column="27" selection-end-line="111" selection-end-column="27" />
+        <state relative-caret-position="30">
+          <caret line="2" column="14" lean-forward="false" selection-start-line="2" selection-start-column="14" selection-end-line="2" selection-end-column="14" />
           <folding />
         </state>
       </provider>
