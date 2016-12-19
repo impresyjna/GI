@@ -28,7 +28,13 @@
 
       <div id="data">
         {{#paper-button raised=true primary=true class="toggle-button"}}<div class="title">Pojazdy ogółem</div> {{paper-icon "keyboard-arrow-down" size=36 class="toggle-icon"}}{{/paper-button}}
-
+      <div class="container">
+          {{#each model.districts as |district|}}
+            {{#paper-checkbox value=value1 onChange=(action (mut value1))}}
+              {{district}}
+            {{/paper-checkbox}}
+          {{/each}}
+      </div>
         <div class="container">
             <div class="row">
               <div class="col-md-4">
