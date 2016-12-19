@@ -8,7 +8,7 @@
     {{#card.content class="layout-col layout-align-space-between"}}
       {{#paper-select
         label="Od"
-        options=model
+        options=model.years
         selected=userState
         onChange=(action (mut userState))
       as |year|
@@ -18,7 +18,7 @@
 
       {{#paper-select
         label="Do"
-        options=model
+        options=model.years
         selected=userState
         onChange=(action (mut userState))
       as |year|
@@ -28,9 +28,20 @@
 
       <div id="data">
         {{#paper-button raised=true primary=true class="toggle-button"}}<div class="title">Pojazdy ogółem</div> {{paper-icon "keyboard-arrow-down" size=36 class="toggle-icon"}}{{/paper-button}}
-        <div class="toggle-hidden">
-          HELLO
-        </div>
+
+        <div class="container">
+            <div class="row">
+              <div class="col-md-4">
+                {{area-chart data=model.charts options=options}}
+              </div>
+              <div class="col-md-4">
+                {{area-chart data=model.charts options=options}}
+              </div>
+              <div class="col-md-4">
+                {{area-chart data=model.charts options=options}}
+              </div>
+            </div>
+          </div>
         {{#paper-button raised=true primary=true class="toggle-button"}}<div class="title">Pojazdy samochodowe i ciągniki – wskaźniki</div> {{paper-icon "keyboard-arrow-down" size=36 class="toggle-icon"}}{{/paper-button}}
         <div class="toggle-hidden"></div>
         {{#paper-button raised=true primary=true class="toggle-button"}}<div class="title">Pojazdy według grup wieku</div> {{paper-icon "keyboard-arrow-down" size=36 class="toggle-icon"}}{{/paper-button}}
