@@ -53,6 +53,7 @@ button.toggle-button {
   display: block;
   width: 100%;
   padding: 1em 1em;
+  background-color: #009688;
 }
 
 .title {
@@ -101,6 +102,19 @@ button.toggle-button {
   border-width: 1px;
 }
 
-md-checkbox.md-default-theme.md-checked .md-ink-ripple, md-checkbox.md-checked .md-ink-ripple {
-  color: #009688 !important;
+.md-button.md-default-theme.md-primary.md-raised {
+  background-color: #009688;
 }
+
+.md-button.md-default-theme.md-primary.md-raised:not([disabled]):hover, a.md-button.md-default-theme.md-primary.md-fab:not([disabled]):hover, a.md-button.md-primary.md-raised:not([disabled]):hover, a.md-button.md-primary.md-fab:not([disabled]):hover,
+.md-button.md-default-theme.md-primary.md-raised:not([disabled]):hover,
+.md-button.md-default-theme.md-primary.md-fab:not([disabled]):hover, .md-button.md-primary.md-raised:not([disabled]):hover, .md-button.md-primary.md-fab:not([disabled]):hover {
+  background-color: #00796B;
+}
+
+md-checkbox.md-default-theme.md-checked .md-ink-ripple, md-checkbox.md-checked .md-ink-ripple {
+  color: #009688;
+}
+
+md-checkbox.md-default-theme .md-ripple, md-checkbox .md-ripple {
+  color: #009688; }
