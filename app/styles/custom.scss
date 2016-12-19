@@ -39,6 +39,16 @@ md-card {
   width: 80%;
 }
 
+#category-card {
+  margin: 10px;
+  position: relative;
+  top: 0%;
+  left: 10%;
+  margin-right: -10%;
+  transform: translate(0%, 0%);
+  width: 80%;
+}
+
 button.toggle-button {
   display: block;
   width: 100%;
@@ -89,4 +99,8 @@ button.toggle-button {
   transition: box-shadow 0.4s cubic-bezier(0.25, 0.8, 0.25, 1), background-color 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
   border-color: #3f51b5;
   border-width: 1px;
+}
+
+md-checkbox.md-default-theme.md-checked .md-ink-ripple, md-checkbox.md-checked .md-ink-ripple {
+  color: #009688 !important;
 }
