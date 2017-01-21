@@ -28,34 +28,61 @@
 
       <div id="data">
         {{#paper-button raised=true primary=true class="toggle-button"}}<div class="title">Pojazdy ogółem</div> {{paper-icon "keyboard-arrow-down" size=36 class="toggle-icon"}}{{/paper-button}}
-      <div class="container">
+      <div class="container my_container">
           {{#each model.districts as |district|}}
             {{#paper-checkbox value=value1 onChange=(action (mut value1))}}
               {{district}}
             {{/paper-checkbox}}
           {{/each}}
-      </div>
-        <div class="container">
-            <div class="row">
-              <div class="col-md-4">
-                {{area-chart data=model.charts options=options}}
-              </div>
-              <div class="col-md-4">
-                {{area-chart data=model.charts options=options}}
-              </div>
-              <div class="col-md-4">
-                {{area-chart data=model.charts options=options}}
-              </div>
+          <div class="row">
+            <div class="col-md-4">
+              {{area-chart data=model.charts options=options}}
+            </div>
+            <div class="col-md-4">
+              {{area-chart data=model.charts options=options}}
+            </div>
+            <div class="col-md-4">
+              {{area-chart data=model.charts options=options}}
             </div>
           </div>
+      </div>
+
         {{#paper-button raised=true primary=true class="toggle-button"}}<div class="title">Pojazdy samochodowe i ciągniki – wskaźniki</div> {{paper-icon "keyboard-arrow-down" size=36 class="toggle-icon"}}{{/paper-button}}
-        <div class="toggle-hidden"></div>
+        <div class="container my_container">
+          {{#each model.districts as |district|}}
+            {{#paper-checkbox value=value1 onChange=(action (mut value1))}}
+              {{district}}
+            {{/paper-checkbox}}
+          {{/each}}
+        </div>
         {{#paper-button raised=true primary=true class="toggle-button"}}<div class="title">Pojazdy według grup wieku</div> {{paper-icon "keyboard-arrow-down" size=36 class="toggle-icon"}}{{/paper-button}}
-        <div class="toggle-hidden"></div>
+        <div class="container my_container"></div>
         {{#paper-button raised=true primary=true class="toggle-button"}}<div class="title">Pojazdy według rodzajów stosowanego paliwa</div> {{paper-icon "keyboard-arrow-down" size=36 class="toggle-icon"}}{{/paper-button}}
-        <div class="toggle-hidden"></div>
+        <div class="container my_container"></div>
         {{#paper-button raised=true primary=true class="toggle-button"}}<div class="title">Przyczepy i naczepy</div> {{paper-icon "keyboard-arrow-down" size=36 class="toggle-icon"}}{{/paper-button}}
       </div>
     {{/card.content}}
   {{/paper-card}}
 </div>
+
+<script>
+  $(document).ready(function(){
+
+    $('.toggle-button').click(function(){
+      if ( this.value === 'collapse' ) {
+        // if it's open close it
+        open = false;
+        this.value = 'expand';
+        $(this).next("div.my_container").hide("slow");
+      }
+      else {
+        // if it's close open it
+        open = true;
+        this.value = 'collapse';
+        $(this).siblings("[value='collapse']").click(); //to collapse the open divs
+        $(this).next("div.my_container").show("slow");
+      }
+    });
+
+  });
+</script>

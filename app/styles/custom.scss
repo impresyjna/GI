@@ -55,6 +55,7 @@ button.toggle-button {
   width: 100%;
   padding: 1em 1em;
   background-color: #009688;
+  font-weight: bold;
 }
 
 .title {
@@ -119,4 +120,8 @@ md-checkbox.md-default-theme.md-checked .md-ink-ripple, md-checkbox.md-checked .
 
 md-checkbox.md-default-theme.md-checked .md-icon, md-checkbox.md-checked .md-icon {
   background-color: #455a64; }
+
+.container.my_container {
+  display: none;
+}
 
