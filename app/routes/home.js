@@ -6,9 +6,6 @@ export default Ember.Route.extend({
   },
 
   model: function(params) {
-    var levelOfData = 1;
-    var query = {levelOfData: levelOfData};
-    console.log(query)
     return this.get('store').query('group', params);
   }
 });

@@ -10,11 +10,9 @@
       <div id='map'></div>
       <div id='map2'></div>
       {{#card.actions class="layout-column" id="categories"}}
-        {{#paper-button raised=true primary=true onClick=(action "targetButton" "category1") id="category1"}}{{fa-icon "road" fixedWidth=true size=3}} 9{{/paper-button}}
-        {{#paper-button raised=true primary=true onClick=(action "targetButton" "category1") id="category2"}}{{fa-icon "bus" fixedWidth=true size=3}} 2{{/paper-button}}
-        {{#paper-button raised=true primary=true onClick=(action "targetButton" "category1") id="category3"}}{{fa-icon "car" fixedWidth=true size=3}} 6{{/paper-button}}
-        {{#paper-button raised=true primary=true onClick=(action "targetButton" "category1") id="category3"}}{{fa-icon "train" fixedWidth=true size=3}} 6{{/paper-button}}
-        {{#paper-button raised=true primary=true onClick=(action "targetButton" "category1") id="category3"}}{{fa-icon "ambulance" fixedWidth=true size=3}} 6{{/paper-button}}
+        {{#each model as |group|}}
+          {{#paper-button raised=true primary=true onClick=(action "targetButton" "category1") id="category1"}}{{fa-icon group.icon fixedWidth=true size=3}}{{group.subgroupsCount}}{{/paper-button}}
+        {{/each}}
       {{/card.actions}}
     {{/card.content}}
   {{/paper-card}}
