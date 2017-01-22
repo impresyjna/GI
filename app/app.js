@@ -13,6 +13,8 @@ App = Ember.Application.extend({
   Resolver
 });
 
+App.Adapter =
+
 loadInitializers(App, config.modulePrefix);
 
 export default App;
