@@ -12,6 +12,7 @@ Router.map(function() {
   this.route('category1');
   this.route('category2');
   this.route('category3');
+  this.route('group', { path: '/groups/:group_id' });
 });
 
 export default Router;
