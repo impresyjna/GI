@@ -11,8 +11,7 @@
       <div id='map2'></div>
       {{#card.actions class="layout-column" id="categories"}}
         {{#each model as |group|}}
-          {{#paper-button raised=true primary=true onClick=(action "targetButton" "category1") id="category1"}}{{fa-icon group.icon fixedWidth=true size=3}}{{group.subgroupsCount}}{{/paper-button}}
-          {{#link-to 'group' group.id (query-params levelOfData=1)}}{{group.groupName}}{{/link-to}}
+          {{#link-to 'group' group.id (query-params levelOfData=1)}}{{#paper-button raised=true primary=true}}{{fa-icon group.icon fixedWidth=true size=3}}{{group.subgroupsCount}}{{/paper-button}}{{/link-to}}
         {{/each}}
       {{/card.actions}}
     {{/card.content}}
