@@ -9,9 +9,6 @@ const Router = Ember.Router.extend({
 Router.map(function() {
   this.route('home', {path: '/'});
   this.route('county');
-  this.route('category1');
-  this.route('category2');
-  this.route('category3');
   this.route('group', { path: '/groups/:group_id' });
 });
 
