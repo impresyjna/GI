@@ -8,15 +8,16 @@
     {{#card.content class="layout-col layout-align-space-between"}}
 
       {{#each model.subgroups as |subgroup|}}
+        {{ subgroup.chartData }}
         <button class="toggle-button md-default-theme md-button md-primary md-raised ember-view md-ink-ripple" {{action
           "getSubgroupInfo" subgroup}}>
           <div class="title">{{subgroup.subgroupName}}</div> {{paper-icon "keyboard-arrow-down" size=36
                                                                           class="toggle-icon"}}
         </button>
         <div class="container my_container">
-          {{#each modelChartsData as |chartData|}}
+          <p>SIEMA</p>
+          {{#each object in chartsData}}
             <p> SIEMA </p>
-            <p> {{chartData.grid_header}}</p>
           {{/each}}
 
         </div>
