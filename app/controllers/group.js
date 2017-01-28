@@ -4,6 +4,7 @@ export default Ember.Controller.extend({
   chartsData: [],
   actions: {
     getSubgroupInfo: function (subgroup) {
+      this.set('chartsData', []);
       var dimensionsHttp = new XMLHttpRequest();
       dimensionsHttp.open( "GET", 'http://gi-kp.azurewebsites.net/groups/' + 1 + '/subgroups/' + subgroup.id + '/dimensions?levelOfData=' + 1, false ); // false for synchronous request
       dimensionsHttp.send(null);
