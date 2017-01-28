@@ -11,7 +11,7 @@
       <div id='map2'></div>
       {{#card.actions class="layout-column" id="categories"}}
         {{#each model as |group|}}
-          {{#link-to 'group' group.id (query-params levelOfData=1)}}{{#paper-button raised=true primary=true}}{{fa-icon group.icon fixedWidth=true size=3}}{{group.subgroupsCount}}{{/paper-button}}{{/link-to}}
+          {{#link-to 'group' group.id (query-params levelOfData=1 class='btn')}}{{#paper-button raised=true primary=true}}{{fa-icon group.icon fixedWidth=true size=3}}{{group.subgroupsCount}}{{/paper-button}}{{/link-to}}
         {{/each}}
       {{/card.actions}}
     {{/card.content}}
@@ -111,14 +111,15 @@
 
     geojson.eachLayer(function (layer) {
 //      layer.bindPopup(layer.feature.properties.name);
-      layer.on('click', openNewPage);
+      layer.on('click', openNewPage layer.feature.id);
     });
 
     map.setView({ lat: 53.01375, lng: 18.59814 }, 8);
     map.invalidateSize();
   }
 
-  function openNewPage() {
-    window.open("/county","_self")
+  function openNewPage(id) {
+      console.log(id)
+    //window.open("/county","_self")
   }
 </script>
