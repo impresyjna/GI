@@ -15,9 +15,8 @@
                                                                           class="toggle-icon"}}
         </button>
         <div class="container my_container">
-          <p>SIEMA</p>
-          {{#each chartsData}}
-            <p> SIEMA </p>
+          {{#each chartsData as |chartData| }}
+            {{bar-chart data=chartData.chart_data options=options}}
           {{/each}}
 
         </div>

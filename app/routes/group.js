@@ -6,8 +6,8 @@ export default Ember.Route.extend({
     groupId: 1
   },
 
-  levelOfData: 1,
-  groupId: 1,
+  levelOfData: 2,
+  groupId: 2,
 
   model: function(params) {
     console.log(params);
@@ -19,6 +19,12 @@ export default Ember.Route.extend({
   serialize: function(model) {
     return {subgroups: model.get('subgroup')};
   },
+
+  setupController: function(controller, model) {
+    controller.set('levelOfData', this.get('levelOfData'));
+    controller.set('groupId', this.get('groupId'));
+    controller.set('model', model);
+  }
 
 
 });
