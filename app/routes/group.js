@@ -8,6 +8,7 @@ export default Ember.Route.extend({
 
   levelOfData: 1,
   groupId: 1,
+  chartsData: [],
 
   model: function(params) {
     console.log(params);
@@ -18,6 +19,11 @@ export default Ember.Route.extend({
 
   serialize: function(model) {
     return {subgroups: model.get('subgroup')};
+  },
+
+  modelChartsData: function() {
+    console.log("SIEMA");
+    return this.get('chartsData');
   },
 
   actions: {
@@ -75,6 +81,50 @@ export default Ember.Route.extend({
         }
       });
 
+      var tempChartsData = [];
+      if(dimensions.length>0) {
+        for (var i = 0; i < dimensions[0]['options'].length; i++) {
+          if(dimensions.length>1) {
+            for (var j = 0; j < dimensions[1]['options'].length; j++) {
+              if (dimensions.length > 2) {
+                for (var k = 0; k < dimensions[2]['options'].length; k++) {
+                  //TODO:
+                  var param1 = dimensions[0]['options'].filter(function( obj ) {
+                    return obj.key == i;
+                  });
+                  var param2 = dimensions[1]['options'].filter(function( obj ) {
+                    return obj.key == j;
+                  });
+                  var param3 = dimensions[2]['options'].filter(function( obj ) {
+                    return obj.key == k;
+                  });
+
+
+                  tempChartsData.push([[param1[0]['value'], param2[0]['value'], param3[0]['value']], matrixForDimensions[i][j][k]]);
+                  var chartData = this.store.createRecord('chart-data', {
+                    grid_header: [param1[0]['value'], param2[0]['value'], param3[0]['value']],
+                    chart_data: matrixForDimensions[i][j][k]
+                  });
+
+                  this.get('chartsData').push(chartData);
+                }
+              } else {
+                //TODO:
+                // matrixForDimensions[i][j] = [];
+                // matrixForDimensions[i][j].push(["Rok", data[0]['unitOfMeasure']]);
+              }
+            }
+          } else {
+            //TODO:
+            // matrixForDimensions[i] = [];
+            // matrixForDimensions[i].push(["Rok", data[0]['unitOfMeasure']]);
+          }
+        }
+      } else {
+        //TODO:
+        // matrixForDimensions = [];
+        // matrixForDimensions.push(["Rok", data[0]['unitOfMeasure']]);
+      }
     }
   }
 });
