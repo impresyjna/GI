@@ -11,7 +11,11 @@
       <div id='map2'></div>
       {{#card.actions class="layout-column" id="categories"}}
         {{#each model as |group|}}
-          {{#link-to 'group' group.id (query-params levelOfData=1 class='btn')}}{{#paper-button raised=true primary=true}}{{fa-icon group.icon fixedWidth=true size=3}}{{group.subgroupsCount}}{{/paper-button}}{{/link-to}}
+          {{#link-to 'group' group.id (query-params levelOfData=1 class='btn')}}
+            <p>{{#paper-button raised=true primary=true}}
+              {{fa-icon group.icon fixedWidth=true size=3}}{{group.subgroupsCount}}
+            {{/paper-button}}</p>
+          {{/link-to}}
         {{/each}}
       {{/card.actions}}
     {{/card.content}}
