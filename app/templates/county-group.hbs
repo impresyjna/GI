@@ -15,10 +15,35 @@
                                                                           class="toggle-icon"}}
         </button>
         <div class="container my_container">
-          {{#each chartsData as |chartData| }}
-            {{bar-chart data=chartData.chart_data options=options}}
-          {{/each}}
+          <div class="row">
+            {{#each chartsData as |chartData| }}
+              {{#if (eq dimensions 1)}}
+                <div class="col-md-6">
+                  <div class="panel panel-default">
+                    <div class="panel-heading">
+                      {{#each chartData.grid_header as |title|}}
+                        <p>{{title}}</p>
+                      {{/each}}
+                    </div>
+                    <div class="panel-body">{{bar-chart data=chartData.chart_data options=options}}</div>
+                  </div>
+                </div>
+              {{/if}}
+              {{#if (eq dimensions 0)}}
+                <div class="col-md-4">
+                  <div class="panel panel-default">
+                    <div class="panel-heading">
+                      {{#each chartData.grid_header as |title|}}
+                        <p>{{title}}</p>
+                      {{/each}}
+                    </div>
+                    <div class="panel-body">{{bar-chart data=chartData.chart_data options=options}}</div>
+                  </div>
+                </div>
+              {{/if}}
 
+            {{/each}}
+          </div>
         </div>
       {{/each}}
 

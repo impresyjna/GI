@@ -2,6 +2,10 @@ import Ember from 'ember';
 
 export default Ember.Controller.extend({
   chartsData: [],
+  cDimension: 1,
+  bDimension: 1,
+  aDimension: 1,
+  dimensions: 0,
 
   actions: {
     getSubgroupInfo: function (subgroup) {
@@ -25,12 +29,15 @@ export default Ember.Controller.extend({
       var matrixForDimensions = null;
       if(dimensions.length>0) {
         matrixForDimensions = new Array(dimensions[0]['options'].length);
+        this.set('aDimension',dimensions[0]['options'].length);
         for (var i = 0; i < dimensions[0]['options'].length; i++) {
           if(dimensions.length>1) {
             matrixForDimensions[i] = new Array(dimensions[1]['options'].length);
+            this.set('bDimension', dimensions[1]['options'].length);
             for (var j = 0; j < dimensions[1]['options'].length; j++) {
               if (dimensions.length > 2) {
                 matrixForDimensions[i][j] = new Array(dimensions[2]['options'].length);
+                this.set('cDimension', dimensions[2]['options'].length);
                 for (var k = 0; k < dimensions[2]['options'].length; k++) {
                   matrixForDimensions[i][j][k] = [];
                   matrixForDimensions[i][j][k].push(["Rok", data[0]['unitOfMeasure']]);
@@ -124,6 +131,7 @@ export default Ember.Controller.extend({
       }
       console.log(this.get('chartsData'));
       this.set('chartsData', this.get('chartsData'));
+      this.set('dimensions', (this.get('aDimension')*this.get('bDimension')*this.get('cDimension'))%3);
     }
   }
 });
