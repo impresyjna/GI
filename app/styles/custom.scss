@@ -1,6 +1,7 @@
-body {
+html,body {
   background-color: #607D8B;
-  height: 100%;
+  margin:0;
+  padding:0;
 }
 
 #map {
@@ -116,6 +117,7 @@ button.toggle-button {
 
 md-checkbox.md-default-theme.md-checked .md-ink-ripple, md-checkbox.md-checked .md-ink-ripple {
   color: #009688;
+  padding: 15px 15px;
 }
 
 md-checkbox.md-default-theme.md-checked .md-icon, md-checkbox.md-checked .md-icon {
@@ -123,5 +125,50 @@ md-checkbox.md-default-theme.md-checked .md-icon, md-checkbox.md-checked .md-ico
 
 .container.my_container {
   display: none;
+  padding: 10px 10px;
 }
 
+.panel-heading {
+  background-color: #009688;
+  padding: 15px 15px;
+  color: #FFFFFF;
+  font-weight: bold;
+}
+
+.panel-default {
+  border-style: solid;
+  border-color: #009688;
+  margin-bottom: 20px;
+  height: 300px;
+}
+
+.col-md-6 {
+  margin: 0px 0px;
+}
+
+.col-md-4 {
+  margin: 0px 0px;
+}
+
+.col-md-12 {
+  margin: 0px 0px;
+}
+
+.my-own-table-head {
+  background-color: #009688;
+  color: #FFFFFF;
+}
+
+.table-responsive {
+  margin-top: 20px;
+}
+
+.filters {
+  padding: 15px 15px;
+}
+
+.panel-primary {
+  border-style: solid;
+  border-color: #009688;
+  margin-bottom: 20px;
+}
