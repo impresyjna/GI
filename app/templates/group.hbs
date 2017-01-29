@@ -2,7 +2,7 @@
   {{#paper-card id="category-card" as |card|}}
     {{#card.title as |title|}}
       {{#title.text as |text|}}
-        {{#text.headline}}Pojazdy{{/text.headline}} <!-- TODO -->
+        {{#text.headline}}{{groupName}}{{/text.headline}}
       {{/title.text}}
     {{/card.title}}
     {{#card.content class="layout-col layout-align-space-between"}}
@@ -15,9 +15,131 @@
                                                                           class="toggle-icon"}}
         </button>
         <div class="container my_container">
-          {{#each chartsData as |chartData| }}
-            {{bar-chart data=chartData.chart_data options=options}}
-          {{/each}}
+          <!-- Filters -->
+          <div class="col-md-12">
+            <div class="panel panel-primary">
+              <div class="panel-heading">
+                Filtrowanie
+              </div>
+              <div class="panel-body">
+                <div class="filters">
+                  {{#paper-select
+                    label="Od"
+                    options=fromDate
+                    selected=selectedFrom
+                    onChange=(action (mut selectedFrom))
+                  as |year|
+                  }}
+                    {{year}}
+                  {{/paper-select}}
+
+                  {{#paper-select
+                    label="Do"
+                    options=toDate
+                    selected=selectedTo
+                    onChange=(action (mut selectedTo))
+                  as |year|
+                  }}
+                    {{year}}
+                  {{/paper-select}}
+                  <button class="md-default-theme md-button md-primary md-raised ember-view md-ink-ripple" {{action
+                    "filterData" subgroup selectedFrom selectedTo}}>
+                    <div class="title">Filtruj</div> {{paper-icon "search" size=12}}
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+          <!-- Charts -->
+          <div class="row">
+            {{#each chartsData as |chartData| }}
+              {{#if (eq dimensions 5)}}
+                <div class="col-md-12">
+                  <div class="panel panel-default">
+                    <div class="panel-heading">
+                      {{#each chartData.grid_header as |title|}}
+                        {{title}}<br>
+                      {{/each}}
+                    </div>
+                    <div class="panel-body">{{bar-chart data=chartData.chart_data options=options}}</div>
+                  </div>
+                </div>
+              {{/if}}
+              {{#if (eq dimensions 1)}}
+                <div class="col-md-6">
+                  <div class="panel panel-default">
+                    <div class="panel-heading">
+                      {{#each chartData.grid_header as |title|}}
+                        {{title}}<br>
+                      {{/each}}
+                    </div>
+                    <div class="panel-body">{{bar-chart data=chartData.chart_data options=options}}</div>
+                  </div>
+                </div>
+              {{/if}}
+              {{#if (eq dimensions 2)}}
+                <div class="col-md-6">
+                  <div class="panel panel-default">
+                    <div class="panel-heading">
+                      {{#each chartData.grid_header as |title|}}
+                        {{title}}<br>
+                      {{/each}}
+                    </div>
+                    <div class="panel-body">{{bar-chart data=chartData.chart_data options=options}}</div>
+                  </div>
+                </div>
+              {{/if}}
+              {{#if (eq dimensions 0)}}
+                <div class="col-md-4">
+                  <div class="panel panel-default">
+                    <div class="panel-heading">
+                      {{#each chartData.grid_header as |title|}}
+                        {{title}}<br>
+                      {{/each}}
+                    </div>
+                    <div class="panel-body">{{bar-chart data=chartData.chart_data options=options}}</div>
+                  </div>
+                </div>
+              {{/if}}
+            {{/each}}
+          </div>
+
+          <!-- Table -->
+          <div class="table-responsive">
+            <table class="table">
+              <thead class="my-own-table-head">
+              <tr>
+                {{#if (not-eq dimensions 5)}}
+                  <th></th>
+                {{/if}}
+                {{#each showDate as |year| }}
+                  <th>{{year}}</th>
+                {{/each}}
+              </tr>
+              </thead>
+
+              <tbody>
+              {{#each chartsData as |chartData| }}
+                <tr>
+                  {{#if (not-eq dimensions 5)}}
+                    <td>
+                      {{#each chartData.grid_header as |title|}}
+                        <b>{{title}}</b><br>
+                      {{/each}}
+                    </td>
+                  {{/if}}
+                  {{#each chartData.chart_data as |data index|}}
+                    {{#if (gt index 1)}}<td>{{data.[1]}}</td>{{/if}}
+
+                  {{/each}}
+                </tr>
+              {{/each}}
+              </tbody>
+
+            </table>
+          </div>
 
         </div>
       {{/each}}

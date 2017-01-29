@@ -130,7 +130,7 @@ md-checkbox.md-default-theme.md-checked .md-icon, md-checkbox.md-checked .md-ico
 
 .panel-heading {
   background-color: #009688;
-  padding: 15px 15px;
+  padding: 1px 1px;
   color: #FFFFFF;
   font-weight: bold;
 }
@@ -140,6 +140,9 @@ md-checkbox.md-default-theme.md-checked .md-icon, md-checkbox.md-checked .md-ico
   border-color: #009688;
   margin-bottom: 20px;
   height: 300px;
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .col-md-6 {

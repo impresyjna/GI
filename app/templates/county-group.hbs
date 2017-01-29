@@ -60,7 +60,7 @@
                   <div class="panel panel-default">
                     <div class="panel-heading">
                       {{#each chartData.grid_header as |title|}}
-                        <p>{{title}}</p>
+                        {{title}}<br>
                       {{/each}}
                     </div>
                     <div class="panel-body">{{bar-chart data=chartData.chart_data options=options}}</div>
@@ -72,7 +72,7 @@
                   <div class="panel panel-default">
                     <div class="panel-heading">
                       {{#each chartData.grid_header as |title|}}
-                        <p>{{title}}</p>
+                        {{title}}<br>
                       {{/each}}
                     </div>
                     <div class="panel-body">{{bar-chart data=chartData.chart_data options=options}}</div>
@@ -84,7 +84,7 @@
                   <div class="panel panel-default">
                     <div class="panel-heading">
                       {{#each chartData.grid_header as |title|}}
-                        <p>{{title}}</p>
+                        {{title}}<br>
                       {{/each}}
                     </div>
                     <div class="panel-body">{{bar-chart data=chartData.chart_data options=options}}</div>
@@ -96,7 +96,7 @@
                   <div class="panel panel-default">
                     <div class="panel-heading">
                       {{#each chartData.grid_header as |title|}}
-                        <p>{{title}}</p>
+                        {{title}}<br>
                       {{/each}}
                     </div>
                     <div class="panel-body">{{bar-chart data=chartData.chart_data options=options}}</div>
@@ -126,7 +126,7 @@
                   {{#if (not-eq dimensions 5)}}
                     <td>
                       {{#each chartData.grid_header as |title|}}
-                        <p><b>{{title}}</b></p>
+                        <b>{{title}}</b><br>
                       {{/each}}
                     </td>
                   {{/if}}
