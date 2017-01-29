@@ -9,6 +9,7 @@ export default Ember.Controller.extend({
   groupName: "",
   fromDate: [],
   toDate: [],
+  showDate: [],
   selectedFrom: 0,
   selectedTo: 0,
 
@@ -47,13 +48,13 @@ export default Ember.Controller.extend({
 
       data.forEach(function(entry) {
         if (dimensions.length == 3) {
-          matrixForDimensions[entry[dimensions[0]['parameterName']]][entry[dimensions[1]['parameterName']]][entry[dimensions[2]['parameterName']]].push([entry['year'].toString(), entry['value']]);
+          matrixForDimensions[entry[dimensions[0]['parameterName']]][entry[dimensions[1]['parameterName']]][entry[dimensions[2]['parameterName']]].push([entry['year'].toString(), entry['value'].toFixed(2)]);
         } else if (dimensions.length == 2) {
-          matrixForDimensions[entry[dimensions[0]['parameterName']]][entry[dimensions[1]['parameterName']]].push([entry['year'].toString(), entry['value']]);
+          matrixForDimensions[entry[dimensions[0]['parameterName']]][entry[dimensions[1]['parameterName']]].push([entry['year'].toString(), entry['value'].toFixed(2)]);
         } else if (dimensions.length == 1) {
-          matrixForDimensions[entry[dimensions[0]['parameterName']]].push([entry['year'].toString(), entry['value']]);
+          matrixForDimensions[entry[dimensions[0]['parameterName']]].push([entry['year'].toString(), entry['value'].toFixed(2)]);
         } else {
-          matrixForDimensions.push([entry['year'].toString(), entry['value']]);
+          matrixForDimensions.push([entry['year'].toString(), entry['value'].toFixed(2)]);
         }
       });
 
@@ -119,11 +120,19 @@ export default Ember.Controller.extend({
       }
       console.log(this.get('chartsData'));
       this.set('chartsData', this.get('chartsData'));
-      this.set('dimensions', (this.get('aDimension')*this.get('bDimension')*this.get('cDimension'))%3);
+      var dimensions = (this.get('aDimension')*this.get('bDimension')*this.get('cDimension'));
+      if(dimensions == 1) {
+        this.set('dimensions', 5);
+      } else {
+        this.set('dimensions', dimensions%3);
+      }
     },
 
     getSubgroupInfo: function (subgroup) {
       this.set('chartsData', []);
+      this.set('fromDate', []);
+      this.set('toDate', []);
+      this.set('showDate', []);
       var dimensionsHttp = new XMLHttpRequest();
       dimensionsHttp.open("GET", 'http://gi-kp.azurewebsites.net/groups/' + this.get('groupId') + '/subgroups/' + subgroup.id + '/dimensions?levelOfData=' + this.get('levelOfData') + "&counties=" + this.get('county'), false); // false for synchronous request
       dimensionsHttp.send(null);
@@ -133,6 +142,7 @@ export default Ember.Controller.extend({
       for (var i=years["firstYear"]; i<= years["lastYear"]; i++) {
         this.get('fromDate').pushObject(i);
         this.get('toDate').pushObject(i);
+        this.get('showDate').pushObject(i);
       }
 
       var xmlHttp = new XMLHttpRequest();
@@ -172,6 +182,13 @@ export default Ember.Controller.extend({
         return el.year >= selectedFrom &&
           el.year <= selectedTo;
       });
+
+      var dates = this.get('showDate');
+      dates = dates.filter(function (el) {
+        return el >= selectedFrom &&
+          el <= selectedTo;
+      });
+      this.set('showDate', dates);
       //
       this.send('generateChartData', dimensions, data);
     }

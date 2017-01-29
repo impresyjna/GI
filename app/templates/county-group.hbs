@@ -15,6 +15,7 @@
                                                                           class="toggle-icon"}}
         </button>
         <div class="container my_container">
+          <!-- Filters -->
           <div class="row">
             {{#paper-select
               label="Od"
@@ -35,15 +36,27 @@
             }}
               {{year}}
             {{/paper-select}}
-            <button  class="md-default-theme md-button md-primary md-raised ember-view md-ink-ripple" {{action
+            <button class="md-default-theme md-button md-primary md-raised ember-view md-ink-ripple" {{action
               "filterData" subgroup selectedFrom selectedTo}}>
               <div class="title">Filtruj</div> {{paper-icon "search" size=12}}
             </button>
           </div>
 
-
+          <!-- Charts -->
           <div class="row">
             {{#each chartsData as |chartData| }}
+              {{#if (eq dimensions 5)}}
+                <div class="col-md-12">
+                  <div class="panel panel-default">
+                    <div class="panel-heading">
+                      {{#each chartData.grid_header as |title|}}
+                        <p>{{title}}</p>
+                      {{/each}}
+                    </div>
+                    <div class="panel-body">{{bar-chart data=chartData.chart_data options=options}}</div>
+                  </div>
+                </div>
+              {{/if}}
               {{#if (eq dimensions 1)}}
                 <div class="col-md-6">
                   <div class="panel panel-default">
@@ -68,9 +81,44 @@
                   </div>
                 </div>
               {{/if}}
-
             {{/each}}
           </div>
+
+          <!-- Table -->
+          <div class="table-responsive">
+            <table class="table">
+              <thead>
+              <tr>
+                {{#if (not-eq dimensions 5)}}
+                  <th></th>
+                {{/if}}
+                {{#each showDate as |year| }}
+                  <th>{{year}}</th>
+                {{/each}}
+              </tr>
+              </thead>
+
+              <tbody>
+              {{#each chartsData as |chartData| }}
+                <tr>
+                  {{#if (not-eq dimensions 5)}}
+                    <td>
+                      {{#each chartData.grid_header as |title|}}
+                        <p>{{title}}</p>
+                      {{/each}}
+                    </td>
+                  {{/if}}
+                  {{#each chartData.chart_data as |data index|}}
+                    {{#if (not-eq index 0)}}<td>{{data.[1]}}</td>{{/if}}
+
+                  {{/each}}
+                </tr>
+              {{/each}}
+              </tbody>
+
+            </table>
+          </div>
+
         </div>
       {{/each}}
 
