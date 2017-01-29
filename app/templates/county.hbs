@@ -8,11 +8,10 @@
       {{#card.actions class="layout-column" id="categories"}}
         {{#each model as |group|}}
           {{#if (not-eq group.subgroupsCount 0)}}
-            <p>{{countyId}}</p>
             {{#link-to 'county-group' group.id (query-params levelOfData=2 county=countyId)}}
-              {{#paper-button raised=true primary=true}}
+              <p>{{#paper-button raised=true primary=true}}
                 {{fa-icon group.icon fixedWidth=true size=3}}{{group.subgroupsCount}}
-              {{/paper-button}}
+              {{/paper-button}}</p>
             {{/link-to}}
           {{/if}}
 
