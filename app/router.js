@@ -8,8 +8,9 @@ const Router = Ember.Router.extend({
 
 Router.map(function() {
   this.route('home', {path: '/'});
-  this.route('county');
+  this.route('county', {path: '/county/:county_id'});
   this.route('group', { path: '/groups/:group_id' });
+  this.route('county-group', {path: '/county-groups/:group_id'});
 });
 
 export default Router;

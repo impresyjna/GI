@@ -75,6 +75,13 @@
 
     geojson.eachLayer(function (layer) {
       //layer.on('click', openNewPage);
+      layer.bindPopup(layer.feature.name);
+      layer.on('mouseover', function (e) {
+        this.openPopup();
+      });
+      layer.on('mouseout', function (e) {
+        this.closePopup();
+      });
     });
 
     map.setView({ lat: 53.01375, lng: 18.59814 }, 8);
@@ -110,16 +117,22 @@
     geojson = L.geoJson(boundaries).addTo(map);
 
     geojson.eachLayer(function (layer) {
+      layer.bindPopup(layer.feature.name);
+      layer.on('mouseover', function (e) {
+        this.openPopup();
+      });
+      layer.on('mouseout', function (e) {
+        this.closePopup();
+      });
 //      layer.bindPopup(layer.feature.properties.name);
-      layer.on('click', openNewPage layer.feature.id);
+      layer.on('click', function(e) {
+        console.log(e.target.feature.id);
+        window.open("/county/"+e.target.feature.id+"?levelOfData=2","_self")
+      });
     });
 
     map.setView({ lat: 53.01375, lng: 18.59814 }, 8);
     map.invalidateSize();
   }
 
-  function openNewPage(id) {
-      console.log(id)
-    //window.open("/county","_self")
-  }
 </script>

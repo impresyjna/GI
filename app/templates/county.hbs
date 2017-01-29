@@ -1,1 +1,86 @@
-{{outlet}}
+<div class="layout-row layout-lg-column" >
+  {{#paper-card as |card|}}
+    {{#card.title as |title|}}
+    {{/card.title}}
+    {{#card.content class="layout-row layout-align-space-between"}}
+      <div id='map'></div>
+      <div id='map2'></div>
+      {{#card.actions class="layout-column" id="categories"}}
+        {{#each model as |group|}}
+          {{#if (not-eq group.subgroupsCount 0)}}
+            <p>{{countyId}}</p>
+            {{#link-to 'county-group' group.id (query-params levelOfData=2 county=countyId)}}
+              {{#paper-button raised=true primary=true}}
+                {{fa-icon group.icon fixedWidth=true size=3}}{{group.subgroupsCount}}
+              {{/paper-button}}
+            {{/link-to}}
+          {{/if}}
+
+        {{/each}}
+      {{/card.actions}}
+    {{/card.content}}
+  {{/paper-card}}
+</div>
+
+<script>
+  var map = L.map('map');
+  $(document).ready(function(){
+    adminLevel6();
+  });
+
+  function adminLevel6() {
+    var str = window.location.href;
+    str = str.replace(/^(?:\/\/|[^\/]+)*\//, "");
+    str = str.replace("county/", "");
+    var layerId = str.replace("?levelOfData=2", "");
+    console.log(str);
+    map.eachLayer(function (layer) {
+      map.removeLayer(layer);
+    });
+
+    map.createPane('labels');
+    map.invalidateSize();
+    // This pane is above markers but below popups
+    map.getPane('labels').style.zIndex = 650;
+
+    // Layers in this pane are non-interactive and do not obscure mouse/touch events
+    map.getPane('labels').style.pointerEvents = 'none';
+
+
+    var cartodbAttribution = '';
+
+    var positron = L.tileLayer('http://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}.png', {
+      attribution: cartodbAttribution
+    }).addTo(map);
+
+    var positronLabels = L.tileLayer('http://{s}.basemaps.cartocdn.com/light_only_labels/{z}/{x}/{y}.png', {
+      attribution: cartodbAttribution,
+      pane: 'labels'
+    }).addTo(map);
+
+    var boundary = boundaries.features.filter(function( obj ) {
+      return obj.id == layerId;
+    });
+
+    geojson = L.geoJson(boundary).addTo(map);
+
+    geojson.eachLayer(function (layer) {
+      layer.bindPopup(layer.feature.name);
+      layer.on('mouseover', function (e) {
+        this.openPopup();
+      });
+      layer.on('mouseout', function (e) {
+        this.closePopup();
+      });
+//      layer.bindPopup(layer.feature.properties.name);
+      layer.on('click', function(e) {
+        console.log(e.target.feature.id);
+        window.open("/county/"+e.target.feature.id,"_self")
+      });
+    });
+
+    map.setView({ lat: 53.01375, lng: 18.59814 }, 8);
+    map.invalidateSize();
+  }
+
+</script>
