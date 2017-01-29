@@ -16,7 +16,12 @@ export default Ember.Controller.extend({
       xmlHttp.open( "GET", 'http://gi-kp.azurewebsites.net/groups/' + this.get('groupId') + '/subgroups/' + subgroup.id + '?levelOfData=' + this.get('levelOfData'), false ); // false for synchronous request
       xmlHttp.send( null );
       var jsonResponse = JSON.parse(xmlHttp.responseText);
-      var data = jsonResponse['data'];
+      var data = [];
+      if(jsonResponse.hasOwnProperty('data')){
+        data = jsonResponse['data'];
+      } else {
+        data = jsonResponse;
+      }
 
 
       var matrixForDimensions = null;

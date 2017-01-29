@@ -11,13 +11,16 @@ export default Ember.Controller.extend({
       dimensionsHttp.send(null);
       var dimensions = JSON.parse(dimensionsHttp.responseText)['dimensions'];
 
-
       var xmlHttp = new XMLHttpRequest();
       xmlHttp.open( "GET", 'http://gi-kp.azurewebsites.net/groups/' + this.get('groupId') + '/subgroups/' + subgroup.id + '?levelOfData=' + this.get('levelOfData')+ "&counties=" + this.get('county'), false ); // false for synchronous request
       xmlHttp.send( null );
       var jsonResponse = JSON.parse(xmlHttp.responseText);
-      var data = jsonResponse['data'];
-
+      var data = [];
+      if(jsonResponse.hasOwnProperty('data')){
+        data = jsonResponse['data'];
+      } else {
+        data = jsonResponse;
+      }
 
       var matrixForDimensions = null;
       if(dimensions.length>0) {
