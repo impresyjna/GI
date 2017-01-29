@@ -6,6 +6,7 @@ export default Ember.Controller.extend({
   bDimension: 1,
   aDimension: 1,
   dimensions: 0,
+  groupName: "",
 
   actions: {
     getSubgroupInfo: function (subgroup) {

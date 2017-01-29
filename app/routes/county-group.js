@@ -23,6 +23,16 @@ export default Ember.Route.extend({
   },
 
   setupController: function(controller, model) {
+    var groupsReq = new XMLHttpRequest();
+    groupsReq.open( "GET", 'http://gi-kp.azurewebsites.net/groups?levelOfData=' +  this.get('levelOfData'), false ); // false for synchronous request
+    groupsReq.send(null);
+    var groups = JSON.parse(groupsReq.responseText)['groups'];
+    var groupId = this.get('groupId');
+
+    var name = groups.filter(function(obj) {
+      return obj.id == groupId;
+    });
+    controller.set('groupName', name[0].groupName);
     controller.set('levelOfData', this.get('levelOfData'));
     controller.set('groupId', this.get('groupId'));
     controller.set('county', this.get('county'));
