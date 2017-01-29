@@ -23,6 +23,7 @@ export default Ember.Route.extend({
   },
 
   setupController: function(controller, model) {
+    /* Get group name */
     var groupsReq = new XMLHttpRequest();
     groupsReq.open( "GET", 'http://gi-kp.azurewebsites.net/groups?levelOfData=' +  this.get('levelOfData'), false ); // false for synchronous request
     groupsReq.send(null);
@@ -32,6 +33,7 @@ export default Ember.Route.extend({
     var name = groups.filter(function(obj) {
       return obj.id == groupId;
     });
+
     controller.set('groupName', name[0].groupName);
     controller.set('levelOfData', this.get('levelOfData'));
     controller.set('groupId', this.get('groupId'));

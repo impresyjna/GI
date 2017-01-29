@@ -7,26 +7,13 @@ export default Ember.Controller.extend({
   aDimension: 1,
   dimensions: 0,
   groupName: "",
+  fromDate: [],
+  toDate: [],
+  selectedFrom: 0,
+  selectedTo: 0,
 
   actions: {
-    getSubgroupInfo: function (subgroup) {
-      this.set('chartsData', []);
-      var dimensionsHttp = new XMLHttpRequest();
-      dimensionsHttp.open( "GET", 'http://gi-kp.azurewebsites.net/groups/' + this.get('groupId') + '/subgroups/' + subgroup.id + '/dimensions?levelOfData=' + this.get('levelOfData') + "&counties=" + this.get('county'), false ); // false for synchronous request
-      dimensionsHttp.send(null);
-      var dimensions = JSON.parse(dimensionsHttp.responseText)['dimensions'];
-
-      var xmlHttp = new XMLHttpRequest();
-      xmlHttp.open( "GET", 'http://gi-kp.azurewebsites.net/groups/' + this.get('groupId') + '/subgroups/' + subgroup.id + '?levelOfData=' + this.get('levelOfData')+ "&counties=" + this.get('county'), false ); // false for synchronous request
-      xmlHttp.send( null );
-      var jsonResponse = JSON.parse(xmlHttp.responseText);
-      var data = [];
-      if(jsonResponse.hasOwnProperty('data')){
-        data = jsonResponse['data'];
-      } else {
-        data = jsonResponse;
-      }
-
+    generateChartData: function(dimensions, data) {
       var matrixForDimensions = null;
       if(dimensions.length>0) {
         matrixForDimensions = new Array(dimensions[0]['options'].length);
@@ -133,6 +120,60 @@ export default Ember.Controller.extend({
       console.log(this.get('chartsData'));
       this.set('chartsData', this.get('chartsData'));
       this.set('dimensions', (this.get('aDimension')*this.get('bDimension')*this.get('cDimension'))%3);
+    },
+
+    getSubgroupInfo: function (subgroup) {
+      this.set('chartsData', []);
+      var dimensionsHttp = new XMLHttpRequest();
+      dimensionsHttp.open("GET", 'http://gi-kp.azurewebsites.net/groups/' + this.get('groupId') + '/subgroups/' + subgroup.id + '/dimensions?levelOfData=' + this.get('levelOfData') + "&counties=" + this.get('county'), false); // false for synchronous request
+      dimensionsHttp.send(null);
+      var dimensions = JSON.parse(dimensionsHttp.responseText)['dimensions'];
+      var years = JSON.parse(dimensionsHttp.responseText)['yearsRange'];
+
+      for (var i=years["firstYear"]; i<= years["lastYear"]; i++) {
+        this.get('fromDate').pushObject(i);
+        this.get('toDate').pushObject(i);
+      }
+
+      var xmlHttp = new XMLHttpRequest();
+      xmlHttp.open("GET", 'http://gi-kp.azurewebsites.net/groups/' + this.get('groupId') + '/subgroups/' + subgroup.id + '?levelOfData=' + this.get('levelOfData') + "&counties=" + this.get('county'), false); // false for synchronous request
+      xmlHttp.send(null);
+      var jsonResponse = JSON.parse(xmlHttp.responseText);
+      var data = [];
+      if (jsonResponse.hasOwnProperty('data')) {
+        data = jsonResponse['data'];
+      } else {
+        data = jsonResponse;
+      }
+
+      this.send('generateChartData', dimensions, data);
+    },
+
+    filterData: function (subgroup, selectedFrom, selectedTo) {
+      this.set('chartsData', []);
+      var dimensionsHttp = new XMLHttpRequest();
+      dimensionsHttp.open("GET", 'http://gi-kp.azurewebsites.net/groups/' + this.get('groupId') + '/subgroups/' + subgroup.id + '/dimensions?levelOfData=' + this.get('levelOfData') + "&counties=" + this.get('county'), false); // false for synchronous request
+      dimensionsHttp.send(null);
+      var dimensions = JSON.parse(dimensionsHttp.responseText)['dimensions'];
+
+      var xmlHttp = new XMLHttpRequest();
+      xmlHttp.open("GET", 'http://gi-kp.azurewebsites.net/groups/' + this.get('groupId') + '/subgroups/' + subgroup.id + '?levelOfData=' + this.get('levelOfData') + "&counties=" + this.get('county'), false); // false for synchronous request
+      xmlHttp.send(null);
+      var jsonResponse = JSON.parse(xmlHttp.responseText);
+      var data = [];
+
+      if (jsonResponse.hasOwnProperty('data')) {
+        data = jsonResponse['data'];
+      } else {
+        data = jsonResponse;
+      }
+
+      data = data.filter(function (el) {
+        return el.year >= selectedFrom &&
+          el.year <= selectedTo;
+      });
+      //
+      this.send('generateChartData', dimensions, data);
     }
   }
 });

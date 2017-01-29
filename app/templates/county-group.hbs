@@ -16,6 +16,33 @@
         </button>
         <div class="container my_container">
           <div class="row">
+            {{#paper-select
+              label="Od"
+              options=fromDate
+              selected=selectedFrom
+              onChange=(action (mut selectedFrom))
+            as |year|
+            }}
+              {{year}}
+            {{/paper-select}}
+
+            {{#paper-select
+              label="Do"
+              options=toDate
+              selected=selectedTo
+              onChange=(action (mut selectedTo))
+            as |year|
+            }}
+              {{year}}
+            {{/paper-select}}
+            <button  class="md-default-theme md-button md-primary md-raised ember-view md-ink-ripple" {{action
+              "filterData" subgroup selectedFrom selectedTo}}>
+              <div class="title">Filtruj</div> {{paper-icon "search" size=12}}
+            </button>
+          </div>
+
+
+          <div class="row">
             {{#each chartsData as |chartData| }}
               {{#if (eq dimensions 1)}}
                 <div class="col-md-6">
