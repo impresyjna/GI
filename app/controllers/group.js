@@ -332,6 +332,10 @@ export default Ember.Controller.extend({
       }
       this.set('multipleCounties', multipleCounties);
       console.log(this.get('options'));
+    },
+    goBack: function(){
+      var appController = this.controllerFor('application');
+      this.transitionTo(appController.get('lastRoute'));
     }
   }
 })
