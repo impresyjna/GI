@@ -25,7 +25,8 @@ export default Ember.Controller.extend({
         max: '2015',
         min: '2010'
       }
-    }
+    },
+    width: $(window).width()*0.15
 
   },
 
@@ -179,10 +180,13 @@ export default Ember.Controller.extend({
       var dimensions = this.get('aDimension') * this.get('bDimension') * this.get('cDimension');
       if (dimensions == 1) {
         this.set('dimensions', 5);
+        this.set('options.width', $(window).width());
       } if (dimensions == 8) {
         this.set('dimensions', 8);
+        this.set('options.width', $(window).width()*0.15);
       } else {
         this.set('dimensions', dimensions % 3);
+        this.set('options.width', $(window).width()*0.2*dimensions%3);
       }
     }
     ,
