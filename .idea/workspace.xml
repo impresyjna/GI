@@ -3,9 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="7dd8b589-d558-4418-b25e-7657af57a4ab" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/group.js" afterPath="$PROJECT_DIR$/app/controllers/group.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/templates/county-group.hbs" afterPath="$PROJECT_DIR$/app/templates/county-group.hbs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/templates/county.hbs" afterPath="$PROJECT_DIR$/app/templates/county.hbs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/templates/group.hbs" afterPath="$PROJECT_DIR$/app/templates/group.hbs" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -58,21 +55,21 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="county.hbs" pinned="false" current-in-tab="true">
+      <file leaf-file-name="county.hbs" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/templates/county.hbs">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="169" lean-forward="false" selection-start-line="0" selection-start-column="169" selection-end-line="0" selection-end-column="169" />
+            <state relative-caret-position="375">
+              <caret line="25" column="25" lean-forward="true" selection-start-line="25" selection-start-column="25" selection-end-line="25" selection-end-column="25" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="group.js" pinned="false" current-in-tab="false">
+      <file leaf-file-name="group.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/controllers/group.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="4860">
-              <caret line="338" column="5" lean-forward="false" selection-start-line="338" selection-start-column="5" selection-end-line="338" selection-end-column="5" />
+            <state relative-caret-position="210">
+              <caret line="214" column="0" lean-forward="true" selection-start-line="214" selection-start-column="0" selection-end-line="214" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -189,10 +186,10 @@
         <option value="$PROJECT_DIR$/app/models/chart-data.js" />
         <option value="$PROJECT_DIR$/app/models/county-chart-data.js" />
         <option value="$PROJECT_DIR$/app/controllers/county-group.js" />
-        <option value="$PROJECT_DIR$/app/controllers/group.js" />
         <option value="$PROJECT_DIR$/app/templates/group.hbs" />
         <option value="$PROJECT_DIR$/app/templates/county-group.hbs" />
         <option value="$PROJECT_DIR$/app/templates/county.hbs" />
+        <option value="$PROJECT_DIR$/app/controllers/group.js" />
       </list>
     </option>
   </component>
@@ -526,12 +523,12 @@
       <workItem from="1484567655836" duration="2563000" />
       <workItem from="1485018726815" duration="13504000" />
       <workItem from="1485362716137" duration="9818000" />
-      <workItem from="1485530885574" duration="65920000" />
+      <workItem from="1485530885574" duration="66610000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="130466000" />
+    <option name="totallyTimeSpent" value="131156000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1440" height="797" extended-state="6" />
@@ -885,14 +882,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/controllers/group.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4860">
-          <caret line="338" column="5" lean-forward="false" selection-start-line="338" selection-start-column="5" selection-end-line="338" selection-end-column="5" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/templates/group.hbs">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -911,6 +900,14 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/app/templates/county.hbs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="375">
+          <caret line="25" column="25" lean-forward="true" selection-start-line="25" selection-start-column="25" selection-end-line="25" selection-end-column="25" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/controllers/county.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="45">
@@ -919,10 +916,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/templates/county.hbs">
+    <entry file="file://$PROJECT_DIR$/app/controllers/group.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="169" lean-forward="false" selection-start-line="0" selection-start-column="169" selection-end-line="0" selection-end-column="169" />
+        <state relative-caret-position="210">
+          <caret line="214" column="0" lean-forward="true" selection-start-line="214" selection-start-column="0" selection-end-line="214" selection-end-column="0" />
           <folding />
         </state>
       </provider>

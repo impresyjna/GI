@@ -209,10 +209,11 @@ export default Ember.Controller.extend({
       if (groupsResp.hasOwnProperty('data')) {
         groups = groupsResp['data'];
       } else {
+        console.log("No data");
         groups = groupsResp;
       }
 
-      if (groups[0].hasOwnProperty('county')) {
+      if (!(Object.getOwnPropertyNames(groups).length === 0) && groups[0].hasOwnProperty('county')) {
         this.set('countyFilterOn', true);
         console.log(this.get('countyFilterOn'));
       }
