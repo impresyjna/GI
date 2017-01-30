@@ -23,7 +23,7 @@ export default Ember.Controller.extend({
       viewWindowMode: 'explicit',
       viewWindow: {
         max: '2015',
-        min: '2011'
+        min: '2010'
       }
     }
 
@@ -179,6 +179,8 @@ export default Ember.Controller.extend({
       var dimensions = this.get('aDimension') * this.get('bDimension') * this.get('cDimension');
       if (dimensions == 1) {
         this.set('dimensions', 5);
+      } if (dimensions == 8) {
+        this.set('dimensions', 8);
       } else {
         this.set('dimensions', dimensions % 3);
       }
@@ -222,6 +224,7 @@ export default Ember.Controller.extend({
         this.get('showDate').pushObject(i);
       }
 
+      console.log(years["firstYear"]);
       this.set('options.hAxis.viewWindow.min', years["firstYear"].toString());
 
       var xmlHttp = new XMLHttpRequest();
@@ -245,10 +248,14 @@ export default Ember.Controller.extend({
 
     filterData: function (subgroup, selectedFrom, selectedTo) {
       this.set('chartsData', []);
-      this.set('showDate', this.get('fromDate'));
+      this.set('countiesData', []);
+      this.set('fromDate', []);
+      this.set('toDate', []);
+      this.set('showDate', []);
+      this.set('multipleCounties', false);
       var multipleCounties = false;
       var dimensionsHttp = new XMLHttpRequest();
-      dimensionsHttp.open("GET", 'http://gi-kp.azurewebsites.net/groups/' + this.get('groupId') + '/subgroups/' + subgroup.id + '/dimensions?levelOfData=' + 2, false); // false for synchronous request
+      dimensionsHttp.open("GET", 'http://gi-kp.azurewebsites.net/groups/' + this.get('groupId') + '/subgroups/' + subgroup.id + '/dimensions?levelOfData=2', false); // false for synchronous request
       dimensionsHttp.send(null);
       var dimensions = JSON.parse(dimensionsHttp.responseText)['dimensions'];
 
@@ -280,6 +287,7 @@ export default Ember.Controller.extend({
       }
 
       if (selectedFrom != 0 && selectedTo != 0) {
+        console.log("Date picked");
         this.set('options.hAxis.viewWindow.min', selectedFrom.toString());
         this.set('options.hAxis.viewWindow.max', selectedTo.toString());
 
@@ -309,6 +317,7 @@ export default Ember.Controller.extend({
               return el.county==entry.key;
             });
             console.log("New data");
+            console.log(entry.key);
             console.log(newData);
             controller.send('generateChartData', dimensions, newData, maxValue);
             var countyData = controller.store.createRecord('county-chart-data', {
@@ -322,6 +331,7 @@ export default Ember.Controller.extend({
         this.send('generateChartData', dimensions, data, maxValue);
       }
       this.set('multipleCounties', multipleCounties);
+      console.log(this.get('options'));
     }
   }
 })

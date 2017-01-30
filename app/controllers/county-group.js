@@ -143,6 +143,8 @@ export default Ember.Controller.extend({
       var dimensions = this.get('aDimension') * this.get('bDimension') * this.get('cDimension');
       if (dimensions == 1) {
         this.set('dimensions', 5);
+      } if (dimensions == 8) {
+        this.set('dimensions', 8);
       } else {
         this.set('dimensions', dimensions % 3);
       }
