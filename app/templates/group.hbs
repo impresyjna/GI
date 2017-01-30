@@ -14,44 +14,122 @@
           <div class="title">{{subgroup.subgroupName}}</div> {{paper-icon "keyboard-arrow-down" size=36
                                                                           class="toggle-icon"}}
         </button>
-        <div class="container my_container">
-          <!-- Filters -->
-          <div class="col-md-12">
-            <div class="panel panel-primary">
-              <div class="panel-heading">
-                Filtrowanie
-              </div>
-              <div class="panel-body">
-                <div class="filters">
-                  {{#paper-select
-                    label="Od"
-                    options=fromDate
-                    selected=selectedFrom
-                    onChange=(action (mut selectedFrom))
-                  as |year|
-                  }}
-                    {{year}}
-                  {{/paper-select}}
+      <div class="container my_container">
+        <!-- Filters -->
+        <div class="col-md-12">
+          <div class="panel panel-primary">
+            <div class="panel-heading">
+              Filtrowanie
+            </div>
+            <div class="panel-body">
+              <div class="filters">
+                {{#paper-select
+                  label="Od"
+                  options=fromDate
+                  selected=selectedFrom
+                  onChange=(action (mut selectedFrom))
+                as |year|
+                }}
+                  {{year}}
+                {{/paper-select}}
 
-                  {{#paper-select
-                    label="Do"
-                    options=toDate
-                    selected=selectedTo
-                    onChange=(action (mut selectedTo))
-                  as |year|
-                  }}
-                    {{year}}
-                  {{/paper-select}}
-                  <button class="md-default-theme md-button md-primary md-raised ember-view md-ink-ripple" {{action
-                    "filterData" subgroup selectedFrom selectedTo}}>
-                    <div class="title">Filtruj</div> {{paper-icon "search" size=12}}
-                  </button>
+                {{#paper-select
+                  label="Do"
+                  options=toDate
+                  selected=selectedTo
+                  onChange=(action (mut selectedTo))
+                as |year|
+                }}
+                  {{year}}
+                {{/paper-select}}
+                <button class="md-default-theme md-button md-primary md-raised ember-view md-ink-ripple" {{action
+                  "filterData" subgroup selectedFrom selectedTo}}>
+                  <div class="title">Filtruj</div> {{paper-icon "search" size=12}}
+                </button>
+
+                <div>
+                  {{#if countyFilterOn}}
+                    {{#each districts as |district|}}
+                      {{#paper-checkbox value=district.checked onChange=(action (mut district.checked))}}
+                        {{district.value}}
+                      {{/paper-checkbox}}
+                    {{/each}}
+                  {{/if}}
                 </div>
               </div>
             </div>
           </div>
+        </div>
+
+        {{#if multipleCounties}}
+          {{#each countiesData as |countyData|}}
+            <div class="col-md-12">
+              <div class="col-md-12">
+                <div class="panel panel-primary">
+                  <div class="panel-heading">
+                    {{countyData.countyName}}
+                  </div>
+                  <div class="panel-body">
+                    <div class="row">
+                      {{#each countyData.chartsData as |chartData| }}
+                        {{#if (eq dimensions 5)}}
+                          <div class="col-md-12">
+                            <div class="panel panel-default">
+                              <div class="panel-heading">
+                                {{#each chartData.grid_header as |title|}}
+                                  {{title}}<br>
+                                {{/each}}
+                              </div>
+                              <div class="panel-body">{{bar-chart data=chartData.chart_data options=options}}</div>
+                            </div>
+                          </div>
+                        {{/if}}
+                        {{#if (eq dimensions 1)}}
+                          <div class="col-md-6">
+                            <div class="panel panel-default">
+                              <div class="panel-heading">
+                                {{#each chartData.grid_header as |title|}}
+                                  {{title}}<br>
+                                {{/each}}
+                              </div>
+                              <div class="panel-body">{{bar-chart data=chartData.chart_data options=options}}</div>
+                            </div>
+                          </div>
+                        {{/if}}
+                        {{#if (eq dimensions 2)}}
+                          <div class="col-md-6">
+                            <div class="panel panel-default">
+                              <div class="panel-heading">
+                                {{#each chartData.grid_header as |title|}}
+                                  {{title}}<br>
+                                {{/each}}
+                              </div>
+                              <div class="panel-body">{{bar-chart data=chartData.chart_data options=options}}</div>
+                            </div>
+                          </div>
+                        {{/if}}
+                        {{#if (eq dimensions 0)}}
+                          <div class="col-md-4">
+                            <div class="panel panel-default">
+                              <div class="panel-heading">
+                                {{#each chartData.grid_header as |title|}}
+                                  {{title}}<br>
+                                {{/each}}
+                              </div>
+                              <div class="panel-body">{{bar-chart data=chartData.chart_data options=options}}</div>
+                            </div>
+                          </div>
+                        {{/if}}
+                      {{/each}}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          {{/each}}
 
 
+        {{else}}
           <!-- Charts -->
           <div class="row">
             {{#each chartsData as |chartData| }}
@@ -107,65 +185,66 @@
           </div>
 
           <!-- Table -->
-          <div class="table-responsive">
-            <table class="table">
-              <thead class="my-own-table-head">
+        <div class="table-responsive">
+          <table class="table">
+            <thead class="my-own-table-head">
+            <tr>
+              {{#if (not-eq dimensions 5)}}
+                <th></th>
+              {{/if}}
+              {{#each showDate as |year| }}
+                <th>{{year}}</th>
+              {{/each}}
+            </tr>
+            </thead>
+
+            <tbody>
+            {{#each chartsData as |chartData| }}
               <tr>
                 {{#if (not-eq dimensions 5)}}
-                  <th></th>
+                  <td>
+                    {{#each chartData.grid_header as |title|}}
+                      <b>{{title}}</b><br>
+                    {{/each}}
+                  </td>
                 {{/if}}
-                {{#each showDate as |year| }}
-                  <th>{{year}}</th>
+                {{#each chartData.chart_data as |data index|}}
+                  {{#if (gt index 1)}}
+                    <td>{{data.[1]}}</td>
+                  {{/if}}
                 {{/each}}
               </tr>
-              </thead>
+            {{/each}}
+            </tbody>
 
-              <tbody>
-              {{#each chartsData as |chartData| }}
-                <tr>
-                  {{#if (not-eq dimensions 5)}}
-                    <td>
-                      {{#each chartData.grid_header as |title|}}
-                        <b>{{title}}</b><br>
-                      {{/each}}
-                    </td>
-                  {{/if}}
-                  {{#each chartData.chart_data as |data index|}}
-                    {{#if (gt index 1)}}<td>{{data.[1]}}</td>{{/if}}
-
-                  {{/each}}
-                </tr>
-              {{/each}}
-              </tbody>
-
-            </table>
-          </div>
-
+          </table>
         </div>
+        {{/if}}
+      </div>
       {{/each}}
 
     {{/card.content}}
   {{/paper-card}}
 </div>
 
-<script>
-  $(document).ready(function () {
+  <script>
+    $(document).ready(function () {
 
-    $('.toggle-button').click(function () {
-      if (this.value === 'collapse') {
-        // if it's open close it
-        open = false;
-        this.value = 'expand';
-        $(this).next("div.my_container").hide("slow");
-      }
-      else {
-        // if it's close open it
-        open = true;
-        this.value = 'collapse';
-        $(this).siblings("[value='collapse']").click(); //to collapse the open divs
-        $(this).next("div.my_container").show("slow");
-      }
+      $('.toggle-button').click(function () {
+        if (this.value === 'collapse') {
+          // if it's open close it
+          open = false;
+          this.value = 'expand';
+          $(this).next("div.my_container").hide("slow");
+        }
+        else {
+          // if it's close open it
+          open = true;
+          this.value = 'collapse';
+          $(this).siblings("[value='collapse']").click(); //to collapse the open divs
+          $(this).next("div.my_container").show("slow");
+        }
+      });
+
     });
-
-  });
-</script>
+  </script>
